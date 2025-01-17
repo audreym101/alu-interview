@@ -1,27 +1,20 @@
 #!/usr/bin/python3
 """Minimum Operations"""
+import math
 
 
 def minOperations(n):
-        """Calculation  of operations needed to obtain exactly n H characters
+    """Minimum Operations"""
+    if n <= 1:
+        return 0
 
-            Args:
-                    n (int): The target number of H characters.
+    operations = 0
+    for i in range(2, int(math.sqrt(abs(n))) + 1):
+        while n % i == 0:
+            operations += i
+            n //= i
 
-                        Returns:
-                                int: The minimum number of operations required.
-                                    """
+    if n > 1:
+        operations += n
 
-                                        if n <= 1:
-                                                    return 0
-
-                                                    operations = 0
-                                                        i = 2
-                                                            while i <= n:
-                                                                        if n % i == 0:
-                                                                                        operations += i
-                                                                                                    n //= i
-                                                                                                            else:
-                                                                                                                            i += 1
-
-                                                                                                                                return operations
+    return operations
